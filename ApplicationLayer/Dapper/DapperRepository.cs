@@ -24,8 +24,6 @@ namespace ApplicationLayer.Dapper
             GC.SuppressFinalize(this);
         }
 
-
-
         public async Task<int> ExecuteAsync(string sp, object param = null, CommandType commandType = CommandType.StoredProcedure)
         {
             int i = 0;
