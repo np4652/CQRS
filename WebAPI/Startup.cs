@@ -50,11 +50,6 @@ namespace WebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
-                //endpoints.Map("/", async context =>
-                //{
-                //    await context.Response.WriteAsync("Welcome to API's Hub");
-                //});
                 endpoints.MapControllerRoute(name: "/", pattern: "{controller=Home}/{action=Index}/{id?}");
             });
             app.UseSwagger();
