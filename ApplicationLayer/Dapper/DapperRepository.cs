@@ -75,7 +75,6 @@ namespace ApplicationLayer.Dapper
         public IQueryable<T> GetAsQueryable<T>(string sp, object parms = null, CommandType commandType = CommandType.Text)
         {
             IQueryable<T> result;
-            //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
             try
             {
                 using (IDbConnection db = new SqlConnection(Connectionstring))
@@ -95,7 +94,6 @@ namespace ApplicationLayer.Dapper
         {
             try
             {
-                //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
                 using (IDbConnection db = new SqlConnection(Connectionstring))
                 {
                     var result = await db.QueryAsync<T>(sp, parms, commandType: commandType);
@@ -112,7 +110,6 @@ namespace ApplicationLayer.Dapper
         {
             try
             {
-                //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
                 using (IDbConnection db = new SqlConnection(Connectionstring))
                 {
                     var result = await db.QueryAsync<T>(sp, parms, commandType: commandType);
@@ -145,7 +142,6 @@ namespace ApplicationLayer.Dapper
         public async Task<T> InsertAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;
-            // using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
             using (IDbConnection db = new SqlConnection(Connectionstring))
             {
                 try
@@ -185,7 +181,6 @@ namespace ApplicationLayer.Dapper
         public async Task<T> UpdateAsync<T>(string sp, DynamicParameters parms, CommandType commandType = CommandType.StoredProcedure)
         {
             T result;
-            //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
             using (IDbConnection db = new SqlConnection(Connectionstring))
             {
                 try
@@ -228,7 +223,6 @@ namespace ApplicationLayer.Dapper
         {
             try
             {
-                // using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
                 using (IDbConnection db = new SqlConnection(Connectionstring))
                 {
                     var result = await db.QueryMultipleAsync(sp, parms, commandType: commandType).ConfigureAwait(false);
@@ -246,11 +240,8 @@ namespace ApplicationLayer.Dapper
             }
         }
 
-
-     
-
         public async Task<dynamic> GetMultipleAsync<T1, T2, TReturn>(string sp, object parms, Func<T1, T2, TReturn> p, string splitOn
-            , CommandType commandType = CommandType.StoredProcedure)
+    , CommandType commandType = CommandType.StoredProcedure)
         {
             parms = prepareParam((jsonAOData)parms);
             var res = new JDataTable<TReturn>
@@ -316,7 +307,6 @@ namespace ApplicationLayer.Dapper
         {
             try
             {
-                //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
                 using (IDbConnection db = new SqlConnection(Connectionstring))
                 {
                     var result = await db.QueryMultipleAsync(sp, parms, commandType: commandType).ConfigureAwait(false);
@@ -331,7 +321,7 @@ namespace ApplicationLayer.Dapper
             }
             catch (Exception ex)
             {
-             
+
                 throw ex;
             }
         }
@@ -340,7 +330,6 @@ namespace ApplicationLayer.Dapper
         {
             try
             {
-                //using (IDbConnection db = new SqlConnection(_config.GetConnectionString(Connectionstring)))
                 using (IDbConnection db = new SqlConnection(Connectionstring))
                 {
                     var result = await db.QueryMultipleAsync(sp, parms, commandType: commandType).ConfigureAwait(false);
@@ -353,10 +342,7 @@ namespace ApplicationLayer.Dapper
             }
         }
 
-        //public DbConnection GetDbconnection() => new SqlConnection(_config.GetConnectionString(Connectionstring));
         public DbConnection GetDbconnection() => new SqlConnection(Connectionstring);
-
-       // public IDbConnection GetMasterConnection() => new SqlConnection(_config.GetConnectionString("MasterConnection"));
 
         public IEnumerable<TReturn> Get<T1, T2, TReturn>(string sqlQuery, Func<T1, T2, TReturn> p, string splitOn, DynamicParameters parms = null, CommandType commandType = CommandType.StoredProcedure)
         {
@@ -390,6 +376,7 @@ namespace ApplicationLayer.Dapper
                 throw ex;
             }
         }
+
         #region t1 To t7 Using Proc
         public async Task<IEnumerable<TReturn>> GetAllAsyncProc<T1, T2, TReturn>(T1 entity, string sqlQuery,
             DynamicParameters parms, Func<T1, T2, TReturn> p, string splitOn)
@@ -462,11 +449,6 @@ namespace ApplicationLayer.Dapper
             }
         }
 
-
-
-
-
-
         #endregion
 
         public async Task<IEnumerable<TReturn>> GetMultiSplit<T1, T2, TReturn>(string sqlQuery, Func<T1, T2, TReturn> p, string splitOn, DynamicParameters parms = null, CommandType commandType = CommandType.StoredProcedure)
@@ -485,9 +467,6 @@ namespace ApplicationLayer.Dapper
                 throw ex;
             }
         }
-
-
-
 
         public async Task<IEnumerable<TReturn>> GetAsync<T1, T2, TReturn>(string sqlQuery, Func<T1, T2, TReturn> p, string splitOn, DynamicParameters parms = null, CommandType commandType = CommandType.StoredProcedure)
         {
